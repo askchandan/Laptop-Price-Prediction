@@ -6,9 +6,24 @@ import numpy as np
 # App title
 st.title("Laptop Price Predictor")
 
-# Load the model and dataframe
-pipe = joblib.load('pipe.pkl')
-df = joblib.load('df.pkl')     
+# Load the model and dataframe with error handling
+try:
+    pipe = joblib.load('pipe.pkl')
+except FileNotFoundError:
+    st.error("The model file 'pipe.pkl' is missing. Please ensure it is in the project directory.")
+    st.stop()
+except Exception as e:
+    st.error(f"An error occurred while loading the model: {e}")
+    st.stop()
+
+try:
+    df = joblib.load('df.pkl')
+except FileNotFoundError:
+    st.error("The data file 'df.pkl' is missing. Please ensure it is in the project directory.")
+    st.stop()
+except Exception as e:
+    st.error(f"An error occurred while loading the data: {e}")
+    st.stop()
 
 # Brand selection
 company = st.selectbox('Brand', df['Company'].unique())
