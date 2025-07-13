@@ -1,0 +1,7 @@
+joblib==1.4.2
+numpy
+scikit-learn
+streamlit
+xgboost==2.1.1
+pandas==2.2.3
+seaborn
